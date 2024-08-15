@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Entry Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrollbars from appearing */
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            max-height: 90%;
+            width: 400px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+        }
+        .image-container {
+            display: none;
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            height: calc(100% - 60px); /* Adjust to fit within container */
+            overflow: hidden;
+        }
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 5px;
+            transition: opacity 0.5s ease;
+            object-fit: cover; /* Maintain aspect ratio while covering the container */
+            display: block; /* Ensure images are block elements for proper spacing */
+        }
+        .image-container img.hidden {
+            opacity: 0;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter your code:</h1>
+        <input type="text" id="codeInput" placeholder="Enter code here" oninput="showImages()">
+        <div class="image-container" id="imageContainer">
+            <img src="https://picsum.photos/800/600?image=10" id="image1" class="hidden">
+            <img src="https://picsum.photos/800/600?image=20" id="image2" class="hidden">
+            <img src="https://picsum.photos/800/600?image=30" id="image3" class="hidden">
+            <!-- Add more images as needed -->
+            <div class="caption">Click the image to see next page</div>
+        </div>
+    </div>
+
+    <script>
+        const imageContainer = document.getElementById('imageContainer');
+        const images = document.querySelectorAll('.image-container img');
+        let currentIndex = 0;
+
+        function showImages() {
+            const codeInput = document.getElementById('codeInput').value;
+
+            // Example: Show images if the entered code is '1234'
+            if (codeInput === '1234') {
+                imageContainer.style.display = 'block';
+                images[currentIndex].classList.remove('hidden');
+            } else {
+                imageContainer.style.display = 'none';
+            }
+        }
+
+        images.forEach((image, index) => {
+            image.addEventListener('click', () => {
+                images[currentIndex].classList.add('hidden');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
