@@ -63,9 +63,8 @@
         <h1>Enter your code:</h1>
         <input type="text" id="codeInput" placeholder="Enter code here" oninput="checkCode()">
         <div class="image-container" id="imageContainer">
-            <img src="image1.jpg" id="image1" class="hidden">
-            <img src="image2.jpg" id="image2" class="hidden">
-            <img src="image3.jpg" id="image3" class="hidden">
+            <img src="1723692752189-f26230c7-6d58-478d-b135-d383caad8584_1.jpg" id="image1" class="hidden">
+            <img src="1723692752189-f26230c7-6d58-478d-b135-d383caad8584_2.jpg" id="image2" class="hidden">
             <!-- Add more images as needed -->
             <div class="caption">Click the image to see next page</div>
             <div class="caption">Double-click an image to view fullscreen. Press ESC to exit fullscreen.</div>
@@ -81,7 +80,7 @@
             const codeInput = document.getElementById('codeInput').value;
 
             // Example: Redirect to the new webpage if the entered code is '1234'
-            if (codeInput === '1234') {
+            if (codeInput.toLowerCase() === 'little man computer') {
                 window.location.href = 'https://arnavkrishnan.github.io/homework/1234.html';
             }
         }
