@@ -3,21 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Image Viewer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #fff;
             color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .container {
             text-align: center;
-            padding: 50px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+        .container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+        }
+        .container img.hidden {
+            opacity: 0;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Next Page!</h1>
+    <div class="container">
+        <img src="image1.jpg" id="image1" class="visible">
+        <img src="image2.jpg" id="image2" class="hidden">
+        <div class="caption">
+            Click the image to switch. Double-click to view fullscreen. Press ESC to exit fullscreen.
+        </div>
+    </div>
+
     <script>
-        alert('Welcome! You have successfully entered the code.');
+        const images = document.querySelectorAll('.container img');
+        let currentIndex = 0;
+
+        images.forEach((image, index) => {
+            image.addEventListener('click', () => {
+                images[currentIndex].classList.add('hidden');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.remove('hidden');
+            });
+
+            image.addEventListener('dblclick', () => {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    image.requestFullscreen();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+        });
     </script>
 </body>
 </html>
